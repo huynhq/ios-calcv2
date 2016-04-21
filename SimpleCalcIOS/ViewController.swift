@@ -11,12 +11,16 @@ import Foundation
 
 class ViewController: UIViewController {
     
-    class ButtonClicks {
-        var number : Int = 0
-    }
+
     var first = true
     var factSet = false
-    
+    let op : Operation = Operation()
+    var factValue : Int = 0
+    var counts : [Int] = []
+    var averages : [Int] = []
+    var countSet = false
+    var averageSet = false
+
     @IBOutlet weak var result: UITextField!
     
     class Operation {
@@ -26,8 +30,6 @@ class ViewController: UIViewController {
 
     }
     
-    let op : Operation = Operation()
-    
     @IBAction func addResult(sender: UIButton) {
         if(first) {
             result.text = ""
@@ -35,8 +37,6 @@ class ViewController: UIViewController {
         }
         result.text = result.text! + sender.titleLabel!.text!
     }
-    
-    var factValue : Int = 0
     
     @IBAction func setValues(sender: UIButton) {
         op.mathFunction = sender.titleLabel!.text!
@@ -67,11 +67,6 @@ class ViewController: UIViewController {
         }
     }
     
-    var counts : [Int] = []
-    var countSet = false
-    var averageSet = false
-    
-    let count : ButtonClicks = ButtonClicks()
     @IBAction func countButton(sender: UIButton) {
         counts.append(Int(result.text!)!)
         first = true
@@ -96,14 +91,11 @@ class ViewController: UIViewController {
         return result
     }
     
-    var averages : [Int] = []
-    
     @IBAction func avgButton(sender: UIButton) {
         averageSet = true
         averages.append(Int(result.text!)!)
         first = true
     }
-    
     
     func compute(left: Int, right: Int, op: String) -> Int {
         var result = 0
