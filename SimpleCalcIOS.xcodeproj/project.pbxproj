@@ -284,6 +284,7 @@
 				DE9398A01CC9721000996FDE /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

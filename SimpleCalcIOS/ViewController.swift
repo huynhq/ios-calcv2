@@ -20,6 +20,7 @@ class ViewController: UIViewController {
     var averages : [Int] = []
     var countSet = false
     var averageSet = false
+    var history : [String] = []
 
     @IBOutlet weak var result: UITextField!
     
@@ -27,6 +28,10 @@ class ViewController: UIViewController {
         var left : Int = 0
         var right : Int = 0
         var mathFunction : String = ""
+        
+        func print() -> String {
+            return String(left) + " " + mathFunction + " " + String(right)
+        }
 
     }
     
@@ -39,8 +44,8 @@ class ViewController: UIViewController {
     }
     
     @IBAction func setValues(sender: UIButton) {
-        op.mathFunction = sender.titleLabel!.text!
         op.left = Int(result.text!)!
+        op.mathFunction = sender.titleLabel!.text!
         first = true
     }
     
@@ -50,8 +55,13 @@ class ViewController: UIViewController {
     }
     
     @IBAction func equalsButton(sender: UIButton) {
+        var record = ""
         if(countSet) {
             result.text = String(counts.count)
+            for n in counts {
+                record = record + String(n) + " count "
+            }
+            record = record + "= " + result.text!
         } else if(averageSet) {
             var sum = 0
             for n in averages {
@@ -59,12 +69,20 @@ class ViewController: UIViewController {
             }
             sum = sum / averages.count
             result.text = String(sum)
+            for n in averages {
+                record = record + String(n) + " avg "
+            }
+            record = record + "= " + result.text!
         } else if(factSet) {
             result.text = String(fact(factValue))
+            record = String(factValue) + " fact = " + result.text!
         } else {
             op.right = Int(result.text!)!
             result.text = String(compute(op.left, right: op.right, op: op.mathFunction))
+            record = op.print() + " = " + result.text!
         }
+        NSLog(record)
+        history.append(record)
     }
     
     @IBAction func countButton(sender: UIButton) {
