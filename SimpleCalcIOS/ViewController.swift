@@ -82,7 +82,12 @@ class ViewController: UIViewController {
             record = op.print() + " = " + result.text!
         }
         NSLog(record)
-        history.append(record)
+        history.append(record + "\n")
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        let secondVC : HistoryViewController = segue.destinationViewController as! HistoryViewController
+        secondVC.historyText = history
     }
     
     @IBAction func countButton(sender: UIButton) {
